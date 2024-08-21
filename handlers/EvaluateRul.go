@@ -92,6 +92,14 @@ func evaluateCondition(condition string, data map[string]interface{}) (bool, err
 		return false, nil
 	}
 
+	if(field == "department"){
+		if(dataValue==value){
+			return true,nil
+		}else{
+			return false,nil
+		}
+	}
+
 	// Convert and compare data value based on the operator
 	switch operator {
 	case ">":
@@ -99,9 +107,9 @@ func evaluateCondition(condition string, data map[string]interface{}) (bool, err
 	case "<":
 		return dataValue.(float64) < parseValue(value), nil
 	case "=":
-		return dataValue == parseValue(value), nil
+		return dataValue.(float64) == parseValue(value), nil
 	case "!=":
-		return dataValue != parseValue(value), nil
+		return dataValue.(float64) != parseValue(value), nil
 	}
 
 	return false, nil
